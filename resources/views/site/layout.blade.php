@@ -32,9 +32,12 @@
                 <li><a href="{{ route('site.index') }}">Home</a></li>
                 <li><a href="#" class="dropdown-trigger" data-target="dropdown1">Categorias <i
                             class="material-icons right">expand_more</i></a></li>
-                <li><a href="{{ route('site.carrinho') }}">Carrinho <span class="new badge red" data-badge-caption="">
-                            {{ \Cart::getContent()->count() }}</span></a></li>
+                @auth
+                    <li><a href="{{ route('site.carrinho') }}">Carrinho <span class="new badge red" data-badge-caption="">
+                                {{ \Cart::getContent()->count() }}</span></a></li>
+                @endauth
             </ul>
+
             @auth
                 <ul id="nav-mobile" class="right">
                     <li><a href="#" class="dropdown-trigger" data-target="dropdown2">Olá
@@ -47,8 +50,6 @@
                     </li>
                 </ul>
             @endauth
-
-
         </div>
     </nav>
 

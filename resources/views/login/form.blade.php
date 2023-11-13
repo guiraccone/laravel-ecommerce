@@ -2,6 +2,13 @@
 @section('title', 'Login')
 @section('conteudo')
 
+    @if (auth()->check())
+        {{-- Usuário autenticado, redirecione para a página home --}}
+        <script>
+            window.location = "{{ route('site.index') }}";
+        </script>
+    @endif
+
     @if ($mensagem = Session::get('erro'))
         <div class="card red" id="mensagem">
             <div class="card-content white-text">
@@ -18,9 +25,7 @@
 
 
     @endif
-
     <div class="row container">
-
         <form action="{{ route('login.auth') }}" method="POST" class="col m6">
             @csrf
             <div class="row">
@@ -35,11 +40,25 @@
                     <label for="password">Senha</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="col s6">
+                    <label>
+                        <input type="checkbox" class="filled-in" name="remember" />
+                        <span>Lembrar-me</span>
+                    </label>
+                </div>
+                <div class="col s6">
+                    <section>
+                        <span><a href="{{route('login.create')}}">Registre-se aqui</a></span>
+                    </section>
+                </div>
+            </div>
 
 
             <button type="submit" id="submit" class="btn green">Entrar</button>
-
         </form>
+
+
     </div>
 
     <script>
